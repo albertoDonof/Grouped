@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_17_082548) do
+ActiveRecord::Schema.define(version: 2021_08_17_200609) do
+
+  create_table "exam_projects", force: :cascade do |t|
+    t.integer "project_id", null: false
+    t.integer "exam_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["exam_id"], name: "index_exam_projects_on_exam_id"
+    t.index ["project_id"], name: "index_exam_projects_on_project_id"
+  end
 
   create_table "exams", force: :cascade do |t|
     t.string "name"
@@ -20,6 +29,13 @@ ActiveRecord::Schema.define(version: 2021_08_17_082548) do
     t.text "description"
   end
 
+  create_table "projects", force: :cascade do |t|
+    t.string "project_name"
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "student_exams", force: :cascade do |t|
     t.integer "student_id", null: false
     t.integer "exam_id", null: false
@@ -27,6 +43,15 @@ ActiveRecord::Schema.define(version: 2021_08_17_082548) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["exam_id"], name: "index_student_exams_on_exam_id"
     t.index ["student_id"], name: "index_student_exams_on_student_id"
+  end
+
+  create_table "student_projects", force: :cascade do |t|
+    t.integer "project_id", null: false
+    t.integer "student_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_student_projects_on_project_id"
+    t.index ["student_id"], name: "index_student_projects_on_student_id"
   end
 
   create_table "students", force: :cascade do |t|
@@ -44,6 +69,10 @@ ActiveRecord::Schema.define(version: 2021_08_17_082548) do
     t.index ["reset_password_token"], name: "index_students_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "exam_projects", "exams"
+  add_foreign_key "exam_projects", "projects"
   add_foreign_key "student_exams", "exams"
   add_foreign_key "student_exams", "students"
+  add_foreign_key "student_projects", "projects"
+  add_foreign_key "student_projects", "students"
 end

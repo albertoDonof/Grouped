@@ -7,6 +7,9 @@ class Student < ApplicationRecord
   validates :first_name, :last_name, presence: true
   has_many :student_exams
   has_many :exams, through: :student_exams
+  
+  has_many :student_projects
+  has_many :projects, through: :student_projects
 
   def full_name
     "#{first_name} #{last_name}"
