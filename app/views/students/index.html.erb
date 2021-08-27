@@ -8,20 +8,24 @@
                     <th scope="col">First name</th>
                     <th scope="col">Last name</th>
                     <th scope="col">Email</th>
+                    <th scope="col">Exams</th>
                     <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     <% @students.each do |student| %>
-                        <tr>
-                            <th scope="row"><%= student.first_name%></th>
-                            <td><%= student.last_name%></td>
-                            <td><%= student.email %></td>
-                            <td>
-                                <%= link_to "View Profile", student_path(student), class:"btn btn-sm btn-success" %>
-                            </td>
+                        <% if student != current_student%>
+                            <tr>
+                                <th scope="row"><%= student.first_name%></th>
+                                <td><%= student.last_name%></td>
+                                <td><%= student.email %></td>
+                                <td> <%= current_student.number_exams(student) %></td>
+                                <td>
+                                    <%= link_to "View Profile", student_path(student), class:"btn btn-sm btn-success" %>
+                                </td>
 
-                        </tr>
+                            </tr>
+                        <% end %>
                     <% end %>
                 </tbody>
                 

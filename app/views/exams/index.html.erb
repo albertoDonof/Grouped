@@ -14,14 +14,14 @@
                 <tbody>
                     <% @exams.each do |exam| %>
                         <tr>
-                            <th scope="row"><%= exam.name%></th>
-                            <td><%= exam.code%></td>
+                            <th scope="row"><%= exam.name %></th>
+                            <td><%= exam.code %></td>
                             <td><%= 'Professor' %></td>
                             <td>
                                 <%= link_to "View Exam", exam_path(exam), class:"btn btn-sm btn-success" %>
                                 <% if current_student.can_subscribe_to_exam?(exam) %>
                                     <%= link_to "Subscribe", student_exams_path(student: current_student, exam: exam), class:"btn btn-sm btn-success", method: :post %>
-                                <%else %>
+                                <% else %>
                                     <span class="badge badge-secondary" >
                                         You are already register
                                     </span>

@@ -4,36 +4,54 @@
 <div class="row">
         <div class="col-9">
             <table class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Code</th>
-                    <th scope="col">Professor</th>
-                    <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% @student.exams.each do |exam| %>
+                <% if @student.projects.any?%>
+                    <thead>
                         <tr>
-                            <th scope="row"><%= exam.name%></th>
-                            <td><%= exam.code%></td>
-                            <td><%= 'Professor' %></td>
-                            <td>
-                                <%= link_to "View Exam", exam_path(exam), class:"btn btn-sm btn-success" %>
-                                <% if current_student.can_subscribe_to_exam?(exam) %>
-                                    <%= link_to "Subscribe", student_exams_path(student: current_student, exam: exam), class:"btn btn-sm btn-success", method: :post %>
-                                <%else %>
-                                    <span class="badge badge-secondary" >
-                                        You are already register
-                                    </span>
-                                <%end %>
-
-                            </td>
-
+                            <th scope="col">Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Actions</th>
                         </tr>
-                    <% end %>
-                </tbody>
-                
+                        </thead>
+                        <tbody>
+                            <% @student.projects.each do |project| %>
+                                <tr>
+                                    <th scope="row"><%= project.project_name%></th>
+                                    <td><%= project.description%></td>
+                                    
+                                </tr>
+                            <% end %>
+                        </tbody>
+                <% else %>
+                    <thead>
+                        <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Code</th>
+                        <th scope="col">Professor</th>
+                        <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @student.exams.each do |exam| %>
+                            <tr>
+                                <th scope="row"><%= exam.name%></th>
+                                <td><%= exam.code%></td>
+                                <td><%= 'Professor' %></td>
+                                <td>
+                                    <%= link_to "View Exam", exam_path(exam), class:"btn btn-sm btn-success" %>
+                                    <% if current_student.can_subscribe_to_exam?(exam) %>
+                                        <%= link_to "Subscribe", student_exams_path(student: current_student, exam: exam), class:"btn btn-sm btn-success", method: :post %>
+                                    <%else %>
+                                        <span class="badge badge-secondary" >
+                                            You are already register
+                                        </span>
+                                    <%end %>
+
+                                </td>
+
+                            </tr>
+                        <% end %>
+                    </tbody>
+                <% end %>
             </table>
         </div>
     </div>

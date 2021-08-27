@@ -23,6 +23,9 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 gem "font-awesome-rails"
 gem 'devise-bootstrap-views', '~> 1.0'
+gem 'omniauth-google-oauth2'
+gem "omniauth-rails_csrf_protection"
+gem 'canard', '~> 0.6.2.pre'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
