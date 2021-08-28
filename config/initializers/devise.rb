@@ -310,4 +310,7 @@ Devise.setup do |config|
   # config.sign_in_after_change_password = true
   config.omniauth :google_oauth2, '255641015641-ovkf2v04qdpvffts4au9pkpm06lm0i85.apps.googleusercontent.com', 'CKtbKiJHH5sRxdxN0b0PzMrk', {}
 
+
+
+ 
 end

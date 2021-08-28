@@ -62,4 +62,5 @@ class Student < ApplicationRecord
     student
   end
   
+  
 end
