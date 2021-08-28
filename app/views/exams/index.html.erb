@@ -20,11 +20,13 @@
                             <td>
                                 <%= link_to "View Exam", exam_path(exam), class:"btn btn-sm btn-success" %>
                                 <% if current_student.can_subscribe_to_exam?(exam) %>
-                                    <%= link_to "Subscribe", student_exams_path(student: current_student, exam: exam), class:"btn btn-sm btn-success", method: :post %>
+                                    <%= link_to "Register", student_exams_path(student: current_student, exam: exam), class:"btn btn-sm btn-success", method: :post %>
                                 <% else %>
                                     <span class="badge badge-secondary" >
                                         You are already register
                                     </span>
+                                    <%= link_to "Unregister", student_exam_path(exam), method: :delete, data: { confirm: "Are you sure?"}, class:"btn btn-sm btn-danger" %>
+                                
                                 <%end %>
 
                             </td>
