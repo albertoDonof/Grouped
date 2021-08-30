@@ -14,14 +14,14 @@
                 </thead>
                 <tbody>
                     <% @students.each do |student| %>
-                        <% if student != current_student%>
+                        <% if student != current_user%>
                             <tr>
                                 <th scope="row"><%= student.first_name%></th>
                                 <td><%= student.last_name%></td>
                                 <td><%= student.email %></td>
-                                <td> <%= current_student.number_exams(student) %></td>
+                                <td> <%= current_user.number_exams(student) %></td>
                                 <td>
-                                    <%= link_to "View Profile", student_path(student), class:"btn btn-sm btn-success" %>
+                                    <%= link_to "View Profile", user_path(student), class:"btn btn-sm btn-success" %>
                                 </td>
 
                             </tr>

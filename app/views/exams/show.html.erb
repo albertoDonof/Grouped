@@ -19,9 +19,12 @@
                             <th scope="row"><%= project.project_name%></th>
                             <td><%= project.description%></td>
                             <td>
-                                <%= link_to "View Project", project_path(project), class:"btn btn-sm btn-success" %>
+                                <%= link_to "View Project", project_path(project), class:"btn btn-sm btn-success" %> <br>
+                            
+                                <% if (can? :destroy, project) && current_user.projects.exists?(project.id) %>
+                                    <%= link_to "Delete Project", user_project_path(project: project, exam: @exam.id), method: :delete, data: { confirm: "Are you sure?"}, class:"btn btn-sm btn-danger" %>
                             </td>
-
+                            <% end %>
                         </tr>
                     <% end %>
                 </tbody>

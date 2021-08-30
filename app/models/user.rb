@@ -1,4 +1,4 @@
-class Student < ApplicationRecord
+class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -7,25 +7,39 @@ class Student < ApplicationRecord
 
   validates :first_name, :last_name, presence: true
   
-  has_many :student_exams
-  has_many :exams, through: :student_exams
+  has_many :user_exams
+  has_many :exams, through: :user_exams
   
-  has_many :student_projects
-  has_many :projects, through: :student_projects
+  has_many :user_projects
+  has_many :projects, through: :user_projects
 
-  acts_as_user :roles => [:project_manager]
+  acts_as_user :roles => [:student, :project_manager, :professor, :admin]
+
+  def is_student?
+    return (self.roles_mask1 & 1) == 1
+  end
+
+  def set_student
+    self.roles_mask1 = (self.roles_mask1 | 1)
+    self.save
+  end
+
+  def unset_student
+    self.roles_mask1 = 0
+    self.save
+  end
 
   def is_project_manager?
-    return (self.roles_mask & 1) == 1
+    return (self.roles_mask2 & 2) == 2
   end
 
   def set_project_manager
-    self.roles_mask = (self.roles_mask | 1)
+    self.roles_mask2 = (self.roles_mask2 | 2)
     self.save
   end
 
   def unset_project_manager
-    self.roles_mask = 0
+    self.roles_mask2 = (self.roles_mask2 & 1)
     self.save
   end
     
@@ -35,10 +49,10 @@ class Student < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
-  def number_exams(student)
+  def number_exams(user)
     cnt = 0
     exams.each do |e|
-      if student.exams.include?(e)
+      if user.exams.include?(e)
         cnt = cnt + 1
       end
     end
@@ -51,16 +65,17 @@ class Student < ApplicationRecord
   
   def self.from_omniauth(access_token)
     data = access_token.info
-    student = Student.where(email: data['email']).first
-    unless student
-        student = Student.create(first_name: data['first_name'],
+    user = User.where(email: data['email']).first
+    unless user
+        user = User.create(first_name: data['first_name'],
           last_name: data['last_name'],
           email: data['email'],
           password: Devise.friendly_token[0,20]
         )
     end
-    student
+    user
   end
   
   
 end
+

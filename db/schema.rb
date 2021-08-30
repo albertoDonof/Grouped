@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_20_080219) do
+ActiveRecord::Schema.define(version: 2021_08_30_085154) do
 
   create_table "exam_projects", force: :cascade do |t|
-    t.integer "project_id", null: false
+    t.integer "project_id"
     t.integer "exam_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -36,43 +36,42 @@ ActiveRecord::Schema.define(version: 2021_08_20_080219) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "student_exams", force: :cascade do |t|
-    t.integer "student_id", null: false
+  create_table "user_exams", force: :cascade do |t|
+    t.integer "user_id", null: false
     t.integer "exam_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["exam_id"], name: "index_student_exams_on_exam_id"
-    t.index ["student_id"], name: "index_student_exams_on_student_id"
+    t.index ["exam_id"], name: "index_user_exams_on_exam_id"
+    t.index ["user_id"], name: "index_user_exams_on_user_id"
   end
 
-  create_table "student_projects", force: :cascade do |t|
+  create_table "user_projects", force: :cascade do |t|
     t.integer "project_id", null: false
-    t.integer "student_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["project_id"], name: "index_student_projects_on_project_id"
-    t.index ["student_id"], name: "index_student_projects_on_student_id"
+    t.index ["project_id"], name: "index_user_projects_on_project_id"
+    t.index ["user_id"], name: "index_user_projects_on_user_id"
   end
 
-  create_table "students", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.string "first_name"
     t.string "last_name"
-    t.integer "roles_mask"
-    t.index ["email"], name: "index_students_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_students_on_reset_password_token", unique: true
+    t.integer "roles_mask1"
+    t.integer "roles_mask2"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "exam_projects", "exams"
-  add_foreign_key "exam_projects", "projects"
-  add_foreign_key "student_exams", "exams"
-  add_foreign_key "student_exams", "students"
-  add_foreign_key "student_projects", "projects"
-  add_foreign_key "student_projects", "students"
+  add_foreign_key "exam_projects", "projects", on_delete: :nullify
+  add_foreign_key "user_exams", "exams"
+  add_foreign_key "user_exams", "users"
+  add_foreign_key "user_projects", "projects", on_delete: :cascade
+  add_foreign_key "user_projects", "users"
 end
