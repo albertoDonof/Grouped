@@ -19,12 +19,17 @@
                             <th scope="row"><%= project.project_name%></th>
                             <td><%= project.description%></td>
                             <td>
-                                <%= link_to "View Project", project_path(project), class:"btn btn-sm btn-success" %> <br>
+                                <%= link_to "View", project_path(project), class:"btn btn-sm btn-success" %> <br>
                             
-                                <% if (can? :destroy, project) && current_user.projects.exists?(project.id) %>
-                                    <%= link_to "Delete Project", user_project_path(project: project, exam: @exam.id), method: :delete, data: { confirm: "Are you sure?"}, class:"btn btn-sm btn-danger" %>
+                                <% if (can? :destroy, project) && (current_user.projects.exists?(project.id))%>
+                                    <%= link_to "Delete", project_path(project: project, exam: @exam.id), method: :delete, data: { confirm: "Are you sure?"}, class:"btn btn-sm btn-danger" %>
+                                <% end %> 
+                                <% if (can? :edit, project) && (current_user.projects.exists?(project.id)) %>
+                                    <%= link_to "Edit", edit_project_path(project) , class:"btn btn-sm btn-success"%>
+                                <% end %>
+
                             </td>
-                            <% end %>
+                            
                         </tr>
                     <% end %>
                 </tbody>

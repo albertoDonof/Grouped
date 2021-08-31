@@ -1,4 +1,3 @@
 Canard::Abilities.for(:project_manager) do
-  can [:destroy], Project
-  
+  can [:manage], Project
 end

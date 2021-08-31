@@ -2,6 +2,7 @@ class UserExamsController < ApplicationController
     def create
         exam = Exam.find(params[:exam])
         @user_exam = UserExam.create(user: current_user, exam: exam)
+        current_user.set_student
         flash[:notice] = "#{exam.name} added"
         redirect_to exams_path
     end

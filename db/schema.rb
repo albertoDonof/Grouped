@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_30_085154) do
+ActiveRecord::Schema.define(version: 2021_08_31_070551) do
 
   create_table "exam_projects", force: :cascade do |t|
     t.integer "project_id"
@@ -62,8 +62,7 @@ ActiveRecord::Schema.define(version: 2021_08_30_085154) do
     t.datetime "remember_created_at"
     t.string "first_name"
     t.string "last_name"
-    t.integer "roles_mask1"
-    t.integer "roles_mask2"
+    t.integer "roles_mask"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

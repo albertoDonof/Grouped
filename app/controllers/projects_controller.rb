@@ -23,6 +23,31 @@ class ProjectsController < ApplicationController
             render 'new'
         end
     end
+    def destroy
+        user_project = UserProject.where(user: current_user, project_id: params[:project]).first
+        user_project.destroy
+        flash[:notice] = "Project removed"
+        if params[:exam].nil?
+            redirect_to user_path(current_user)
+        else
+            redirect_to exam_path(params[:exam])
+        end
+    end
+
+    def edit
+        @project = Project.find(params[:id])
+    end
+    def update
+        project = Project.find(params[:id])
+        if project.update(params.require(:project).permit(:project_name, :description, exam_ids: []))
+            flash[:notice] = "Project was updated successfully"
+            redirect_to project
+        else
+            flash[:alert] = "Something wrong"
+            render 'edit'
+        end
+
+    end
 
     private
         def can_create_project?(ids)

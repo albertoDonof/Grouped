@@ -16,30 +16,30 @@ class User < ApplicationRecord
   acts_as_user :roles => [:student, :project_manager, :professor, :admin]
 
   def is_student?
-    return (self.roles_mask1 & 1) == 1
+    return (self.roles_mask & 1) == 1
   end
 
   def set_student
-    self.roles_mask1 = (self.roles_mask1 | 1)
+    self.roles_mask = (self.roles_mask | 1)
     self.save
   end
 
   def unset_student
-    self.roles_mask1 = 0
+    self.roles_mask = 0
     self.save
   end
 
   def is_project_manager?
-    return (self.roles_mask2 & 2) == 2
+    return (self.roles_mask & 2) == 2
   end
 
   def set_project_manager
-    self.roles_mask2 = (self.roles_mask2 | 2)
+    self.roles_mask = (self.roles_mask | 2)
     self.save
   end
 
   def unset_project_manager
-    self.roles_mask2 = (self.roles_mask2 & 1)
+    self.roles_mask = (self.roles_mask & 1)
     self.save
   end
     

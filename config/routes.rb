@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :exams, only: [:show, :index]
   resources :user_exams, only: [:create, :destroy]
   resources :user_projects, only: [:create, :destroy]
-  resources :projects, only: [:show, :new, :create, :destroy]
+  resources :projects
 
   
 end
