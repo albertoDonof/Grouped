@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   
   resources :users, only: [:show, :index]
-  resources :exams, only: [:show, :index]
+  resources :exams
   resources :user_exams, only: [:create, :destroy]
   resources :user_projects, only: [:create, :destroy]
   resources :projects

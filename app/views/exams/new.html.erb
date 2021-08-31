@@ -1,0 +1,30 @@
+<h1> New Exam </h1>
+<div class="row">
+  <div class="col-9">
+        <%= form_with(model: @exam, local:true) do |f| %>
+            <div class="form-row">
+                <div class="form-group col">
+                    <%= f.label :name %> <br>
+                    <%= f.text_field :name,  class: 'form-control' %>
+                </div>
+                <div class="form-group col">
+                    <%= f.label :code %> <br>
+                    <%= f.text_field :code,  class: 'form-control' %>
+                </div>
+            </div>
+            <div class="form-group">
+                <%= f.label :description %> <br>
+                <%= f.text_area :description, class: 'form-control' %> 
+                <br>
+            </div>
+            <div class="form-check form-check-inline">
+                <%= f.collection_check_boxes :exam_ids, Exam.all, :id, :name do |cb| %>
+                    <% cb.label(class: "checkbox-inline input_checkbox form-check-label") {cb.check_box(class: "checkbox form-check-input") + cb.text } %> 
+                <% end %>
+            </div>
+            <p>
+                <%= f.submit "Create Project", class:"btn btn-primary" %>
+            </p>
+        <% end %>
+    </div>
+</div>

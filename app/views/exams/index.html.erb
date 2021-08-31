@@ -20,12 +20,16 @@
                             <td>
                                 <%= link_to "View Exam", exam_path(exam), class:"btn btn-sm btn-success" %>
                                 <% if current_user.can_subscribe_to_exam?(exam) %>
-                                    <%= link_to "Register", user_exams_path(user: current_user, exam: exam), class:"btn btn-sm btn-success", method: :post %>
+                                    <% if can? :create, UserExam %>
+                                        <%= link_to "Register", user_exams_path(user: current_user, exam: exam), class:"btn btn-sm btn-success", method: :post %>
+                                    <% end %>
                                 <% else %>
                                     <span class="badge badge-secondary" >
                                         You are already register
                                     </span>
-                                    <%= link_to "Unregister", user_exam_path(exam), method: :delete, data: { confirm: "Are you sure?"}, class:"btn btn-sm btn-danger" %>
+                                     <% if can? :destroy, UserExam %>
+                                        <%= link_to "Unregister", user_exam_path(exam), method: :delete, data: { confirm: "Are you sure?"}, class:"btn btn-sm btn-danger" %>
+                                    <% end %>
                                 
                                 <%end %>
 

@@ -18,16 +18,20 @@
       </li>
     </ul> 
     
-    
+      
       <ul class="navbar-nav ml-auto">
-      <% if current_user.exams.any? %>
-        <li class="nav-item">
-          <%= link_to fa_icon("plus", text: "Create Project"), new_project_path, class:"nav-link"%>
-        </li>
-      <% else %>
-        <li class="nav-item">
-          <%= link_to "Subscribe to exam for create project", exams_path, class:"nav-link" %>
-        </li>
+      <% if can? :create, Project %>
+        <% if current_user.exams.any? %>
+          <li class="nav-item">
+            <%= link_to fa_icon("plus", text: "Create Project"), new_project_path, class:"nav-link"%>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Subscribe to exam for create project", exams_path, class:"nav-link" %>
+          </li>
+        <% end %>
+      <% elsif can? :create, Exam %>
+        <%= link_to fa_icon("plus", text: "New Exam"), new_exam_path, class:"nav-link"%>
       <% end %>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

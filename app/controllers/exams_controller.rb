@@ -5,4 +5,10 @@ class ExamsController < ApplicationController
     def show
         @exam = Exam.find(params[:id])
     end
+    def new
+        @project = Project.new
+    end
+    def create
+    end
+
 end

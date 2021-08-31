@@ -42,6 +42,20 @@ class User < ApplicationRecord
     self.roles_mask = (self.roles_mask & 1)
     self.save
   end
+
+  def is_professor?
+    return (self.roles_mask & 4) == 4
+  end
+
+  def set_professor
+    self.roles_mask = (self.roles_mask | 4)
+    self.save
+  end
+
+  def unset_professor
+    self.roles_mask = (self.roles_mask & 2)
+    self.save
+  end
     
 
 
