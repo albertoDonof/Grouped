@@ -31,7 +31,9 @@
           </li>
         <% end %>
       <% elsif can? :create, Exam %>
-        <%= link_to fa_icon("plus", text: "New Exam"), new_exam_path, class:"nav-link"%>
+        <li class="nav-item">
+          <%= link_to fa_icon("plus", text: "New Exam"), new_exam_path, class:"nav-link"%>
+        </li>
       <% end %>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
