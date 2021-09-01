@@ -1,6 +1,13 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
+  after_action :assign_role, only:[:create]
+
+  def assign_role
+    if not current_user.nil?
+      current_user.set_student
+    end
+  end
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
