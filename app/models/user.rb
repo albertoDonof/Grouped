@@ -90,6 +90,12 @@ class User < ApplicationRecord
     user
   end
   
-  
+  def professor_has_one_exam
+    if is_professor? && exams.count == 1
+        false
+    elsif exams.count == 0 && is_professor?
+        true
+    end
+  end
 end
 

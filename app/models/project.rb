@@ -5,4 +5,6 @@ class Project < ApplicationRecord
     has_many :users, through: :user_projects
     has_many :exam_projects
     has_many :exams, through: :exam_projects
+
+   
 end

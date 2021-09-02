@@ -2,12 +2,19 @@ class ProjectsController < ApplicationController
 
     def show
         @project = Project.find(params[:id])
+        client = Octokit::Client.new(:client_id => "a08f56db54febfec2a18", :client_secret => "7489bef620b06a5a58d31501824488be49026019")
+        content = client.contents(@project.repo)
+        if client.last_response != nil
+            @readme = client.readme @project.repo, :accept => 'application/vnd.github.html'
+        end
     end
     def new
         @project = Project.new
     end
     def create
-        @project = Project.new(params.require(:project).permit(:project_name, :description, exam_ids: []))
+        
+        @project = Project.new(params.require(:project).permit(:project_name, :description,:repo, exam_ids: []))
+        authorize! :create, @project
         @project.users << current_user
         if @project.save
             if can_create_project?(params[:project][:exam_ids])
@@ -25,8 +32,12 @@ class ProjectsController < ApplicationController
     end
     def destroy
         user_project = UserProject.where(user: current_user, project_id: params[:project]).first
+        authorize! :destroy, Project
         user_project.destroy
         flash[:notice] = "Project removed"
+        if current_user.projects.empty?
+            current_user.unset_project_manager
+        end
         if params[:exam].nil?
             redirect_to user_path(current_user)
         else
@@ -39,7 +50,9 @@ class ProjectsController < ApplicationController
     end
     def update
         project = Project.find(params[:id])
-        if project.update(params.require(:project).permit(:project_name, :description, exam_ids: []))
+        authorize! :update, project
+
+        if project.update(params.require(:project).permit(:project_name, :description, :repo, exam_ids: []))
             flash[:notice] = "Project was updated successfully"
             redirect_to project
         else

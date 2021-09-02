@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   resources :user_projects, only: [:create, :destroy]
   resources :projects
 
-  
+  get 'professors', to: "users#index_professors"
+
 end

@@ -22,6 +22,11 @@
                                 <td> <%= current_user.number_exams(student) %></td>
                                 <td>
                                     <%= link_to "View Profile", user_path(student), class:"btn btn-sm btn-success" %>
+                                    <% current_user.projects.each do |project| %>
+                                        <% if (can? :create, UserProject) && !(student.projects.exists?(project.id)) %>
+                                            <%= link_to "Add to #{project.project_name}", user_projects_path(user: student, project: project), class:"btn btn-sm btn-success", method: :post%>
+                                        <% end %>
+                                    <% end %>
                                 </td>
 
                             </tr>

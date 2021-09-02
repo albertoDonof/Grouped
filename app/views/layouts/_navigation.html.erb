@@ -12,9 +12,8 @@
       <li class="nav-item <%= 'active' if request.path == users_path %>">
         <%= link_to "Students", users_path, class:"nav-link" %>
       </li>
-      
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      <li class="nav-item <%= 'active' if request.path == professors_path %>">
+        <%= link_to "Professors", professors_path, class:"nav-link" %>
       </li>
     </ul> 
     
@@ -32,7 +31,9 @@
         <% end %>
       <% elsif can? :create, Exam %>
         <li class="nav-item">
-          <%= link_to fa_icon("plus", text: "New Exam"), new_exam_path, class:"nav-link"%>
+          <% if current_user.professor_has_one_exam %>
+            <%= link_to fa_icon("plus", text: "New Exam"), new_exam_path, class:"nav-link"%>
+          <% end %>
         </li>
       <% end %>
       <li class="nav-item dropdown">

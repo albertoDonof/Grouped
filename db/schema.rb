@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_31_070551) do
+ActiveRecord::Schema.define(version: 2021_09_02_100524) do
 
   create_table "exam_projects", force: :cascade do |t|
     t.integer "project_id"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 2021_08_31_070551) do
     t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "repo"
   end
 
   create_table "user_exams", force: :cascade do |t|
@@ -67,8 +68,8 @@ ActiveRecord::Schema.define(version: 2021_08_31_070551) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "exam_projects", "exams"
-  add_foreign_key "exam_projects", "projects", on_delete: :nullify
+  add_foreign_key "exam_projects", "exams", on_delete: :cascade
+  add_foreign_key "exam_projects", "projects", on_delete: :cascade
   add_foreign_key "user_exams", "exams"
   add_foreign_key "user_exams", "users"
   add_foreign_key "user_projects", "projects", on_delete: :cascade

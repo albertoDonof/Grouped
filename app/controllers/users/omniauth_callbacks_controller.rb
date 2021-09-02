@@ -1,6 +1,12 @@
 
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  
+  after_action :assign_role, only:[:google_oauth2]
+
+  def assign_role
+    if not current_user.nil?
+      current_user.set_student
+    end
+  end
   def google_oauth2
         # You need to implement the method below in your model (e.g. app/models/user.rb)
       

@@ -1,0 +1,39 @@
+<h1> Professors </h1>
+
+<div class="row">
+    <div class="col-9">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                    <th scope="col">First name</th>
+                    <th scope="col">Last name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Exam</th>
+                    <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @professors.each do |professor| %>
+                        <% if professor != current_user%>
+                            <tr>
+                                <th scope="row"><%= professor.first_name%></th>
+                                <td><%= professor.last_name%></td>
+                                <td><%= professor.email %></td>
+                                
+                                    <td> <% if !professor.exams.first.nil? %>
+                                            <%= professor.exams.first.name  %>
+                                        <% end %>
+                                    </td>
+                                
+                                <td>
+                                    <%= link_to "View Profile", user_path(professor), class:"btn btn-sm btn-success" %>
+                                </td>
+
+                            </tr>
+                        <% end %>
+                    <% end %>
+                </tbody>
+                
+            </table>
+    </div>
+</div>

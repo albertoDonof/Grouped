@@ -10,14 +10,14 @@ class ExamsController < ApplicationController
     end
     def create
         exam = Exam.new(params.require(:exam).permit(:name, :code, :description))
+        authorize! :create, exam
         if exam.save
             flash[:notice] = "Exam created successfully"
             current_user.exams << exam
             redirect_to exams_path
         else
             flash[:alert] = "Something wrong"
-            redirect_to 'new'
-
+            render 'new'
         end
     end
     def edit
@@ -25,6 +25,8 @@ class ExamsController < ApplicationController
     end
     def update
         exam = Exam.find(params[:id])
+        authorize! :update, exam
+
         if exam.update(params.require(:exam).permit(:name, :code, :description))
             flash[:notice] = "Exam was updated successfully"
             redirect_to exam
@@ -32,6 +34,14 @@ class ExamsController < ApplicationController
             flash[:alert] = "Something wrong"
             render 'edit'
         end
+    end
+    def destroy
+        user_exams = UserExam.where(exam_id: params[:id])
+        exam_projects = ExamProject.where(exam_id: params[:id])
+        authorize! :destroy, Exam
+        user_exams.destroy_all
+        exam_projects.destroy_all
+        redirect_to exams_path
     end
 
 end

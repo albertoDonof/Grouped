@@ -16,7 +16,7 @@
                         <tr>
                             <th scope="row"><%= exam.name %></th>
                             <td><%= exam.code %></td>
-                            <td><%= 'Professor' %></td>
+                            <td><%= exam.users.professors.first.full_name %></td>
                             <td>
                                 <%= link_to "View Exam", exam_path(exam), class:"btn btn-sm btn-success" %>
                                 <% if current_user.can_subscribe_to_exam?(exam) %>
@@ -33,7 +33,7 @@
                                     <% end %>
                                     <% if (can? :edit, Exam) && (current_user.exams.exists?(exam.id)) %>
                                             <%= link_to "Edit", edit_exam_path(exam), data: { confirm: "Are you sure?"}, class:"btn btn-sm btn-success" %>
-                                        <% end %>
+                                    <% end %>
                                     <% if (can? :destroy, Exam) && (current_user.exams.exists?(exam.id))%>
                                         <%= link_to "Delete", exam_path(exam), method: :delete, data: { confirm: "Are you sure?"}, class:"btn btn-sm btn-danger" %>
 
