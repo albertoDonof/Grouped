@@ -32,7 +32,7 @@
                                         <%= link_to "Unregister", user_exam_path(exam), method: :delete, data: { confirm: "Are you sure?"}, class:"btn btn-sm btn-danger" %>
                                     <% end %>
                                     <% if (can? :edit, Exam) && (current_user.exams.exists?(exam.id)) %>
-                                            <%= link_to "Edit", edit_exam_path(exam), data: { confirm: "Are you sure?"}, class:"btn btn-sm btn-success" %>
+                                            <%= link_to "Edit", edit_exam_path(exam), class:"btn btn-sm btn-success" %>
                                     <% end %>
                                     <% if (can? :destroy, Exam) && (current_user.exams.exists?(exam.id))%>
                                         <%= link_to "Delete", exam_path(exam), method: :delete, data: { confirm: "Are you sure?"}, class:"btn btn-sm btn-danger" %>
