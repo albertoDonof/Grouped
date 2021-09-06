@@ -19,10 +19,10 @@
                                     <td><%= project.description%></td>
                                     <td>
                                         <%= link_to "View", project_path(project), class:"btn btn-sm btn-success" %> <br>
-                                        <% if ((can? :destroy, project) && (current_user.projects.exists?(project.id))) %>
+                                        <% if (can? :destroy, project) && (project.user == current_user) %>
                                             <%= link_to "Delete", project_path(project: project), method: :delete, data: { confirm: "Are you sure?"}, class:"btn btn-sm btn-danger" %>
                                         <% end %>
-                                        <% if ((can? :destroy, project) && (current_user.projects.exists?(project.id))) %>
+                                        <% if (can? :destroy, project) && (project.user == current_user) %>
                                             <%= link_to "Edit", edit_project_path(project) , class:"btn btn-sm btn-success"%>
                                         <% end %>
 

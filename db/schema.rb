@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_03_071058) do
+ActiveRecord::Schema.define(version: 2021_09_06_084621) do
 
   create_table "exam_projects", force: :cascade do |t|
     t.integer "project_id"
@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(version: 2021_09_03_071058) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "repo"
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
   create_table "user_exams", force: :cascade do |t|
@@ -70,6 +72,7 @@ ActiveRecord::Schema.define(version: 2021_09_03_071058) do
 
   add_foreign_key "exam_projects", "exams", on_delete: :cascade
   add_foreign_key "exam_projects", "projects", on_delete: :cascade
+  add_foreign_key "projects", "users"
   add_foreign_key "user_exams", "exams"
   add_foreign_key "user_exams", "users"
   add_foreign_key "user_projects", "projects", on_delete: :cascade

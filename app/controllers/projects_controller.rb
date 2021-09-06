@@ -16,6 +16,7 @@ class ProjectsController < ApplicationController
         @project = Project.new(params.require(:project).permit(:project_name, :description,:repo, exam_ids: []))
         authorize! :create, @project
         @project.users << current_user
+        @project.user = current_user
         if @project.save
             if can_create_project?(params[:project][:exam_ids])
                 flash[:notice] = "Projec was created successfully"
@@ -35,9 +36,7 @@ class ProjectsController < ApplicationController
         authorize! :destroy, Project
         user_project.destroy
         flash[:notice] = "Project removed"
-        if current_user.projects.empty?
-            current_user.unset_project_manager
-        end
+        unset
         if params[:exam].nil?
             redirect_to user_path(current_user)
         else
@@ -63,6 +62,12 @@ class ProjectsController < ApplicationController
     end
 
     private
+        def unset 
+            projects = current_user.projects.where(user: current_user)
+            if projects.empty?
+                current_user.unset_project_manager
+            end
+        end
         def can_create_project?(ids)
             ids.drop(1).each do |id|
                 if !current_user.exams.exists?(id)
