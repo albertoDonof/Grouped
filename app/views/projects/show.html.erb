@@ -1,5 +1,10 @@
-<h1> <%= @project.project_name %> </h1>
+<h1> <%= @project.project_name %> </h1> 
 <p> <%= @project.description %></p>
+<% if current_user.is_professor? && @project.exams.exists?(current_user.exams.first.id) %>
+    <%= link_to "Download Code", @archive, class:"btn btn-success", style:"margin-bottom: 5px" %>
+<% end %>
+
+ 
 <div class="row">
     <div class="col-9">
             <table class="table table-bordered table-hover">

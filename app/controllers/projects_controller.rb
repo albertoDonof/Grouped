@@ -3,9 +3,11 @@ class ProjectsController < ApplicationController
     def show
         @project = Project.find(params[:id])
         client = Octokit::Client.new(:client_id => "a08f56db54febfec2a18", :client_secret => "7489bef620b06a5a58d31501824488be49026019")
-        content = client.contents(@project.repo)
-        if client.last_response != nil
+        if client.repository?(@project.repo)
             @readme = client.readme @project.repo, :accept => 'application/vnd.github.html'
+           if (current_user.is_professor? && @project.exams.exists?(current_user.exams.first.id))
+                @archive = client.archive_link(@project.repo)
+            end
         end
     end
     def new
