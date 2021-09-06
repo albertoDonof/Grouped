@@ -32,9 +32,9 @@ class ProjectsController < ApplicationController
         end
     end
     def destroy
-        user_project = UserProject.where(user: current_user, project_id: params[:project]).first
+        project = Project.find(params[:project])
         authorize! :destroy, Project
-        user_project.destroy
+        project.destroy
         flash[:notice] = "Project removed"
         unset
         if params[:exam].nil?

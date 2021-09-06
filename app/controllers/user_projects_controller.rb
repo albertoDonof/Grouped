@@ -14,6 +14,14 @@ class UserProjectsController < ApplicationController
 
         end
     end
+    def destroy
+        user_project = UserProject.where(user: params[:student], project: params[:project]).first
+        authorize! :destroy, user_project
+        user_project.destroy
+        flash[:notice] = "successfully removed"
+        redirect_to project_path(params[:project])
+    end
+    
 
     private
         def can_add?(project, user)
