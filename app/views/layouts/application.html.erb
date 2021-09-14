@@ -13,9 +13,14 @@
   <body>
     <%= render 'layouts/navigation' %>
 
-    <div class="container">
+    <div class="container mess-cont">
       <%= render 'layouts/messages' %>
-      <%= yield %>
+      <div class="container page-cont">
+        <%= yield %>
+      </div>
+      <%if user_signed_in?%>
+      <%= render 'layouts/footer'%>
+      <% end %>
     </div>
   </body>
 </html>
