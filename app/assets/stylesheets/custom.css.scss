@@ -2,8 +2,30 @@
 
 .navbar-brand {
     font-size: 2rem !important;
-}
-.nav-item {
-    margin-top: 7px !important;
+    font-weight: normal;
 }
 
+.my-button{
+    background-color: rgba(82,109,255,1);
+    color: white;
+}
+
+.my-button:hover{
+    color: white;
+}
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+    background-color: rgba(82,109,255,1) !important;
+}
+
+.my-title-log{
+    margin-bottom: 10px;
+}
+
+.page-cont{
+    margin-top: 50px;
+}
+
+.mess-cont{
+    margin-top: 10px;
+}
