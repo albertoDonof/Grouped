@@ -1,3 +1,25 @@
-<div class="container">
-    <a>Footer</a>
+<div class="footer">
+    <div class="container row">
+        <div class="col-sm">
+            <div>
+                <h2>Grouped</h2>
+                <p>Grouped is a web application to help you find the group for your project exams.</p>
+            </div>
+        </div>
+        <div class="col d-flex flex-column align-items-center col-mob">
+            <div>
+                <h3>Navigation</h3>
+                <p class="p-foot"><a><%= link_to "Exams", exams_path%></a></p>
+                <p class="p-foot"><a><%= link_to "Students", users_path%></a></p>
+                <p class="p-foot"><a><%= link_to "Professors", professors_path%></a></p>
+            </div>
+        </div>
+        <div class="col d-flex flex-column align-items-center col-mob">
+            <div>
+                <h3>Contacts</h3>
+                <p class="p-foot">Email</p>
+                <p class="p-foot">Social</p>
+            </div>
+        </div>
+    </div>
 </div>
