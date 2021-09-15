@@ -5,12 +5,17 @@
     font-weight: normal;
 }
 
+.my-image{
+    width: 300px;
+}
+
 .my-button{
     background-color: rgba(82,109,255,1);
     color: white;
 }
 
 .my-button:hover{
+    background-color: rgb(55, 78, 211);
     color: white;
 }
 
@@ -28,4 +33,56 @@
 
 .mess-cont{
     margin-top: 10px;
+}
+
+//Tables
+table{
+    border-collapse: collapse;
+    vertical-align: middle;
+}
+
+thead{
+    background-color: rgba(82,109,255,1);
+    color: white;
+}
+
+// Footer
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.footer{
+    margin-top: auto;
+    width: 100%;
+    background-color: rgba(82,109,255,1);
+    display: flex;
+    justify-content: center;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    color: white;
+}
+
+.p-foot{
+    a{
+        color: white;
+    }
+    color: white;
+    margin-bottom: 4px;
+}
+
+@media screen and (max-width: 600px){
+    .footer{
+        h2{
+            font-size: x-large;
+        }
+        h3{
+            font-size: x-large;
+        }
+    }
+
+    .col-mob{
+        align-items: flex-start !important;
+    }
 }
