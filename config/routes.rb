@@ -3,12 +3,12 @@ Rails.application.routes.draw do
   root 'pages#home'
 
   
-  resources :users, only: [:show, :index]
+  resources :users, only: [:show, :index, :destroy]
   resources :exams
   resources :user_exams, only: [:create, :destroy]
   resources :user_projects, only: [:create, :destroy]
   resources :projects
-
+  get 'upgrade', to: "users#upgrade_student"
   get 'professors', to: "users#index_professors"
 
 end

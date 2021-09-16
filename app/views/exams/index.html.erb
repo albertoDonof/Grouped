@@ -19,6 +19,12 @@
                             <td><%= exam.users.professors.first.full_name %></td>
                             <td>
                                 <%= link_to "View Exam", exam_path(exam), class:"btn btn-sm btn-success" %>
+                               <% if (can? :edit, Exam) && ((current_user.exams.exists?(exam.id)) || current_user.is_admin?) %>
+                                    <%= link_to "Edit", edit_exam_path(exam), class:"btn btn-sm btn-success" %>
+                                <% end %>
+                                <% if (can? :destroy, Exam) && ((current_user.exams.exists?(exam.id)) || current_user.is_admin?) %>
+                                    <%= link_to "Delete", exam_path(exam), method: :delete, data: { confirm: "Are you sure?"}, class:"btn btn-sm btn-danger" %>
+                                <% end %>
                                 <% if current_user.can_subscribe_to_exam?(exam) %>
                                     <% if can? :create, UserExam %>
                                         <%= link_to "Register", user_exams_path(user: current_user, exam: exam), class:"btn btn-sm btn-success", method: :post %>
@@ -31,13 +37,7 @@
                                         </span>
                                         <%= link_to "Unregister", user_exam_path(exam), method: :delete, data: { confirm: "Are you sure?"}, class:"btn btn-sm btn-danger" %>
                                     <% end %>
-                                    <% if (can? :edit, Exam) && (current_user.exams.exists?(exam.id)) %>
-                                            <%= link_to "Edit", edit_exam_path(exam), class:"btn btn-sm btn-success" %>
-                                    <% end %>
-                                    <% if (can? :destroy, Exam) && (current_user.exams.exists?(exam.id))%>
-                                        <%= link_to "Delete", exam_path(exam), method: :delete, data: { confirm: "Are you sure?"}, class:"btn btn-sm btn-danger" %>
-
-                                    <% end %>
+                                    
                                 
                                 <%end %>
 

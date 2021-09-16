@@ -14,7 +14,7 @@ class User < ApplicationRecord
   has_many :projects, through: :user_projects
 
   acts_as_user :roles => [:student, :project_manager, :professor, :admin]
-
+ 
   def is_student?
     return (self.roles_mask & 1) == 1
   end
@@ -56,7 +56,17 @@ class User < ApplicationRecord
     self.roles_mask = (self.roles_mask & 2)
     self.save
   end
-    
+  def is_admin?
+    return (self.roles_mask & 8) == 8
+  end
+  def set_admin
+    self.roles_mask = (self.roles_mask | 8)
+    self.save
+  end
+  def unset_admin
+    self.roles_mask = (self.roles_mask & 4)
+    self.save
+  end
 
 
   def full_name

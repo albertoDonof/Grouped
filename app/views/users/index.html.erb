@@ -27,6 +27,11 @@
                                             <%= link_to "Add to #{project.project_name}", user_projects_path(user: student, project: project), class:"btn btn-sm btn-success", method: :post%>
                                         <% end %>
                                     <% end %>
+                                    <% if (can? :manage, User)%>
+                                        <%= link_to "Upgrade to professor", upgrade_path(student), class:"btn btn-sm btn-success" %>
+                                        <%= link_to "Remove", user_path(student), method: :delete , data: { confirm: "are_you_sure" }, class:"btn btn-sm btn-danger"%>
+                                    <% end %>
+
                                 </td>
 
                             </tr>

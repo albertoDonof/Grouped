@@ -9,7 +9,26 @@ class UsersController < ApplicationController
     def index_professors
         @professors = User.professors
     end
-    def show_professor
+    def destroy
+        user = User.find(params[:id])
+        authorize! :destroy, user
+        user.destroy
+        flash[:notice] = "User removed"
+        if user.is_professor?
+            redirect_to professors_path
+        else
+            redirect_to users_path
+        end
+    end
+
+    def upgrade_student
+        student = User.find(params[:format])
+        authorize! :manage, student
+        student.set_project_manager
+        student.set_professor
+        redirect_to users_path
+
+
     end
     
     
