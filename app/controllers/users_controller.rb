@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
     def index
+        
         @students = User.non_professors
     end
     def show
