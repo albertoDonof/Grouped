@@ -59,18 +59,7 @@
       </li>
         
       </ul>
-    <% else %>
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item <%= 'active' if request.path == exams_path %>">
-        <%= link_to "Exams", exams_path, class:"nav-link" %>
-      </li>
-      <li class="nav-item <%= 'active' if request.path == users_path %>">
-        <%= link_to "About", users_path, class:"nav-link" %>
-      </li>
-      <li class="nav-item <%= 'active' if request.path == professors_path %>">
-        <%= link_to "Contacts", professors_path, class:"nav-link" %>
-      </li>
-    </ul> 
+   
     <% end %>
     
   </div>
