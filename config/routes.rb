@@ -10,5 +10,8 @@ Rails.application.routes.draw do
   resources :projects
   get 'upgrade', to: "users#upgrade_student"
   get 'professors', to: "users#index_professors"
-
+  
+  resources :conversations do
+    resources :messages
+  end
 end

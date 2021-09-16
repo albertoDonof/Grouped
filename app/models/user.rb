@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [:google_oauth2]
-
+  acts_as_messageable
   validates :first_name, :last_name, presence: true
   
   has_many :user_exams
@@ -106,6 +106,12 @@ class User < ApplicationRecord
     elsif exams.count == 0 && is_professor?
         true
     end
+  end
+  def name 
+    "#{first_name} #{last_name}"
+  end
+  def mailboxer_email(object)
+    nil
   end
 end
 
