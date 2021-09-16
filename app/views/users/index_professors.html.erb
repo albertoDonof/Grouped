@@ -27,9 +27,11 @@
                                 
                                 <td>
                                     <%= link_to "View Profile", user_path(professor), class:"btn btn-sm btn-success" %>
-                                     <% if (can? :manage, User)%>
+                                    <% if (can? :manage, User)%>
                                         <%= link_to "Remove", user_path(professor), method: :delete , data: { confirm: "Are you sure?" }, class:"btn btn-sm btn-danger"%>
-                                     <% end %>
+                                    <% end %>
+                                    <%= link_to "Start conversation", new_conversation_path(user_id: professor.id), class:"btn btn-sm btn-success" %>
+
                                 </td>
 
                             </tr>

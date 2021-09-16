@@ -31,7 +31,7 @@
                                         <%= link_to "Upgrade to professor", upgrade_path(student), class:"btn btn-sm btn-success" %>
                                         <%= link_to "Remove", user_path(student), method: :delete , data: { confirm: "are_you_sure" }, class:"btn btn-sm btn-danger"%>
                                     <% end %>
-                                    <%= link_to "start conversation", new_conversation_path(user_id: student.id) %>
+                                    <%= link_to "Start conversation", new_conversation_path(user_id: student.id), class:"btn btn-sm btn-success" %>
 
                                 </td>
 
