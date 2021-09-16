@@ -16,7 +16,16 @@
         <%= link_to "Professors", professors_path, class:"nav-link" %>
       </li>
       <li class="nav-item <%= 'active' if request.path == conversations_path %>">
-        <%= link_to "Conversations", conversations_path, class:"nav-link" %>
+        <% if current_user.mailbox.conversations.all? { |c| c.is_read?(current_user) } %>
+          <%= link_to "Conversations", conversations_path, class:"nav-link" %>
+        <% else %>
+        <div class="container">
+          <div class="row">
+          <%= link_to "Conversations", conversations_path, class:"nav-link"%>
+          <%= fa_icon("circle", class:"my-circle") %>
+          </div>
+        </div>
+        <% end %>
       </li>
     </ul> 
     
