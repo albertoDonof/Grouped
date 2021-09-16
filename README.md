@@ -28,4 +28,4 @@ Il sito gestisce dati riguardo le seguenti entità:
 Tramite le api di github, nella pagina di visualizzazione di un progetto, è possibile visualizzare il readme del progetto e, nel caso l’utente che lo sta visualizzando sia un professore, anche il link per scaricare la repository.
 
 <h1> Mockup </h1>
-![story_board](https://user-images.githubusercontent.com/57904745/133673358-2a0523f3-7569-47d0-ac9a-2577b067c9ec.png)
+![story_board](https://user-images.githubusercontent.com/57904745/133673358-2a0523f3-7569-47d0-ac9a-2577b067c9ec.png?)
