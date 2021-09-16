@@ -1,13 +1,21 @@
 <h1> <%= @conversation.subject %> </h1>
-
-<% @conversation.receipts_for(current_user).each do |receipt| %>
-    <div>
-        <%= receipt.message.sender.name %>
-        <%= receipt.message.body%>
+<div class="row">
+    <div class="col-9">
+        <% @conversation.receipts_for(current_user).each do |receipt| %>
+            <div class="card my-card">
+                <div class="card-body">
+                    <%= receipt.message.sender.name %>:<br>
+                    <%= receipt.message.body%>
+                </div>
+            </div>
+        <% end %>
+        <div class="send_msg">
+            <%= form_tag conversation_messages_path(@conversation), method: :post do%>
+                <%= text_area_tag :body,nil, class: "form-control"%>
+                <p class="mt-3">
+                <%= submit_tag "Send message", class:"btn my-button" %>
+                </p>
+            <%end %>
+        </div>
     </div>
-<% end %>
-
-<%= form_tag conversation_messages_path(@conversation), method: :post do%>
-    <%= text_area_tag :body %>
-    <%= submit_tag %>
-<%end %>
+</div>
