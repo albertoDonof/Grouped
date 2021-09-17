@@ -16,7 +16,9 @@
                         <tr>
                             <th scope="row"><%= exam.name %></th>
                             <td><%= exam.code %></td>
-                            <td><%= exam.users.professors.first.full_name %></td>
+                            <% if !exam.users.professors.first.nil? %>
+                                <td><%= exam.users.professors.first.full_name %></td>
+                            <%end%>
                             <td>
                                 <%= link_to "View Exam", exam_path(exam), class:"btn btn-sm btn-success" %>
                                <% if (can? :edit, Exam) && ((current_user.exams.exists?(exam.id)) || current_user.is_admin?) %>

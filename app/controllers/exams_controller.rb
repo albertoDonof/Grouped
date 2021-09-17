@@ -38,9 +38,11 @@ class ExamsController < ApplicationController
     def destroy
         user_exams = UserExam.where(exam_id: params[:id])
         exam_projects = ExamProject.where(exam_id: params[:id])
+        exam = Exam.find(params[:id])
         authorize! :destroy, Exam
         user_exams.destroy_all
         exam_projects.destroy_all
+        exam.destroy
         redirect_to exams_path
     end
 
