@@ -34,6 +34,7 @@ class ProjectsController < ApplicationController
         end
     end
     def destroy
+        byebug
         project = Project.find(params[:project])
         authorize! :destroy, Project
         project.destroy

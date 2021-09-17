@@ -10,16 +10,14 @@ RSpec.describe ProjectsController, type: :controller do
         get :show, :params => params
         expect(assigns(:project)).to eql(pr)
     end
-    it "should destroy projects" do
-        pr = exams(:one)
-        params = {:project => pr.id}
-    
-        pr_mng = users(:project_manager)
-        sign_in pr_mng
-    
-        get :destroy, :params => params
-        pr_tst = Project.where(:id => pr.id)
-        expect(e_tst).to be_empty
+    it "Should update projects" do
+        pr = projects(:one)
+        params = {:id => pr.id, :project=>{:project_name=>"NomeProva"}}
+        prg_mng = users(:project_manager)
+        sign_in prg_mng
+        get :update, :params => params
+        pr_tst = Project.find(pr.id)
+        expect(pr_tst.project_name).to eql(pr.project_name)
     end
    
 end

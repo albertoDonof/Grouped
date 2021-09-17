@@ -2,9 +2,12 @@
 student:
   email: student@example.com
   roles_mask: 1
-professor:
-  email: professor@example.com
-  roles_mask: 7
 project_manager:
   email: manager@example.com
   roles_mask: 3
+professor:
+  email: professor@example.com
+  roles_mask: 7
+admin:
+  email: admin@example.com
+  roles_mask: 15

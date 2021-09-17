@@ -11,7 +11,7 @@ class UserExamsController < ApplicationController
     def destroy
         if can_destroy_exam?(params[:id])
                 user_exam = UserExam.where(user: current_user, exam_id: params[:id]).first
-                authorize! :destroy, user_exam
+                authorize! :destroy, UserExam
 
                 user_exam.destroy
                 flash[:notice] = "Exam removed"
