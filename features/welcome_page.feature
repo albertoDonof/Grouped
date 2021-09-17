@@ -5,5 +5,5 @@ Feature: Welcome Page
     I want to see the welcome page of the app
 
     Scenario: View Welcome Page
-        Given I am just logged in
+        Given I am authenticated as Student
         Then I should see "Welcome to Grouped"
