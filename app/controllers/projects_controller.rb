@@ -14,7 +14,6 @@ class ProjectsController < ApplicationController
         @project = Project.new
     end
     def create
-        
         @project = Project.new(params.require(:project).permit(:project_name, :description,:repo, exam_ids: []))
         authorize! :create, @project
         @project.users << current_user
@@ -34,7 +33,6 @@ class ProjectsController < ApplicationController
         end
     end
     def destroy
-        byebug
         project = Project.find(params[:project])
         authorize! :destroy, Project
         project.destroy
@@ -52,7 +50,7 @@ class ProjectsController < ApplicationController
     end
     def update
         project = Project.find(params[:id])
-        authorize! :update, project
+        authorize! :update, project, :message => "You are not authorized"
 
         if project.update(params.require(:project).permit(:project_name, :description, :repo, exam_ids: []))
             flash[:notice] = "Project was updated successfully"

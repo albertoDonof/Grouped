@@ -28,7 +28,15 @@ RSpec.describe UsersController, type: :controller do
         get :show, :params => params
         expect(assigns(:student)).to eql(professor)
     end
-
+    it "Should not destroy user" do
+        student = users(:student)
+        params = {:id => student.id}
+        student = users(:student)
+        sign_in student
+        get :destroy, :params => params
+        u_tst = User.where(:id => student.id)
+        expect(u_tst).not_to be_empty
+    end
     it "Should destroy user" do
         student = users(:student)
         params = {:id => student.id}
@@ -37,7 +45,6 @@ RSpec.describe UsersController, type: :controller do
         get :destroy, :params => params
         u_tst = User.where(:id => student.id)
         expect(u_tst).to be_empty
-
     end
      
 end

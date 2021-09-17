@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     end
     def destroy
         user = User.find(params[:id])
-        authorize! :destroy, user
+        authorize! :destroy, user, :message => "You are not authorized"
         user.destroy
         flash[:notice] = "User removed"
         if user.is_professor?

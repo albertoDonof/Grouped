@@ -10,7 +10,7 @@ class ExamsController < ApplicationController
     end
     def create
         exam = Exam.new(params.require(:exam).permit(:name, :code, :description))
-        authorize! :create, exam
+        authorize! :create, exam, :message => "You are not authorized"
         if exam.save
             flash[:notice] = "Exam created successfully"
             current_user.exams << exam
@@ -25,7 +25,7 @@ class ExamsController < ApplicationController
     end
     def update
         exam = Exam.find(params[:id])
-        authorize! :update, exam
+        authorize! :update, exam, :message => "You are not authorized"
 
         if exam.update(params.require(:exam).permit(:name, :code, :description))
             flash[:notice] = "Exam was updated successfully"
@@ -39,7 +39,7 @@ class ExamsController < ApplicationController
         user_exams = UserExam.where(exam_id: params[:id])
         exam_projects = ExamProject.where(exam_id: params[:id])
         exam = Exam.find(params[:id])
-        authorize! :destroy, Exam
+        authorize! :destroy, Exam, :message => "You are not authorized"
         user_exams.destroy_all
         exam_projects.destroy_all
         exam.destroy
