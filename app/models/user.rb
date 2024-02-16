@@ -91,8 +91,13 @@ class User < ApplicationRecord
     data = access_token.info
     user = User.where(email: data['email']).first
     unless user
+      if !data['last_name'] #se last_name non c'è
+        new_last = data['first_name']
+      else
+        new_last = data['last_name']
+      end
         user = User.create(first_name: data['first_name'],
-          last_name: data['last_name'],
+          last_name: new_last,
           email: data['email'],
           password: Devise.friendly_token[0,20]
         )
