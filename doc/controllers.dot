@@ -1,0 +1,18 @@
+digraph controllers_diagram {
+	graph[overlap=false, splines=true, bgcolor="none"]
+	"ApplicationController" [shape=Mrecord, label="{ApplicationController|\l|configure_permitted_parameters\l|_layout\l}"]
+	"ConversationsController" [shape=Mrecord, label="{ConversationsController|create\ldestroy\lindex\lnew\lshow\l|\l|_layout\l}"]
+	"ExamsController" [shape=Mrecord, label="{ExamsController|create\ldestroy\ledit\lindex\lnew\lshow\lupdate\l|\l|_layout\l}"]
+	"MessagesController" [shape=Mrecord, label="{MessagesController|create\l|\l|_layout\lset_conversation\l}"]
+	"PagesController" [shape=Mrecord, label="{PagesController|home\l|\l|_layout\l}"]
+	"ProjectsController" [shape=Mrecord, label="{ProjectsController|create\ldestroy\ledit\lnew\lshow\lupdate\l|\l|_layout\lcan_create_project?\lunset\l}"]
+	"UserExamsController" [shape=Mrecord, label="{UserExamsController|create\ldestroy\l|\l|_layout\lcan_destroy_exam?\l}"]
+	"UserProjectsController" [shape=Mrecord, label="{UserProjectsController|create\ldestroy\l|\l|_layout\lcan_add?\l}"]
+	"Users::ConfirmationsController" [shape=Mrecord, label="{Users::ConfirmationsController|\l|\l|_layout\l}"]
+	"Users::OmniauthCallbacksController" [shape=Mrecord, label="{Users::OmniauthCallbacksController|assign_role\lgoogle_oauth2\l|\l|_layout\l}"]
+	"Users::PasswordsController" [shape=Mrecord, label="{Users::PasswordsController|\l|\l|_layout\l}"]
+	"Users::RegistrationsController" [shape=Mrecord, label="{Users::RegistrationsController|assign_role\l|\l|_layout\l}"]
+	"Users::SessionsController" [shape=Mrecord, label="{Users::SessionsController|\l|\l|_layout\l}"]
+	"Users::UnlocksController" [shape=Mrecord, label="{Users::UnlocksController|\l|\l|_layout\l}"]
+	"UsersController" [shape=Mrecord, label="{UsersController|destroy\lindex\lindex_professors\lshow\lupgrade_student\l|\l|_layout\l}"]
+}
